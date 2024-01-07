@@ -385,6 +385,7 @@
             { "u_has_trait": "ARACHNID_ARMS" },
             { "u_has_trait": "ARACHNID_ARMS_OK" },
             { "u_has_trait": "AMORPHOUS" },
+            { "u_has_trait": "WINGS_BIRD" },
             { "u_has_trait": "ARM_TENTACLES" },
             { "u_has_trait": "ARM_TENTACLES_4" },
             { "u_has_trait": "ARM_TENTACLES_8" }
