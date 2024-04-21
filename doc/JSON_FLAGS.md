@@ -452,8 +452,9 @@ Some armor flags, such as `WATCH` and `ALARMCLOCK` are compatible with other ite
 - ```WEBBED_FEET``` You have webbings on your feet, supporting your swimming speed if not wearing footwear.
 - ```WEBBED_HANDS``` You have webbings on your hands, supporting your swimming speed.
 - ```WEB_RAPPEL``` You can rappel down staircases and sheer drops of any height.
-- ```WINGS_1``` If you're not immobilized and have <50% burden, you reduce fall damage by 1 Z-level.
-- ```WINGS_2``` If you're not immobilized and have <50% burden, you reduce fall damage by 2 Z-levels.
+- ```WINGS_1``` You can slow your fall, effectively reducing the height of it by 1 level.
+- ```WINGS_2``` You can slow your fall, effectively reducing the height of falls by 2 levels, and ignore pit-like traps.
+- ```WING_ARMS``` Two instances of this flag enable you to glide and ignore pit traps if not above 50% carryweight or 4 lift strength. 
 - ```WINGGLIDE``` You can glide using some part of your body and strenuous physical effort.
 - ```mycus``` TBD
 
