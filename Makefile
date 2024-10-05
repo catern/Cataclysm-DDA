@@ -394,19 +394,19 @@ endif
 ifeq ($(RELEASE), 1)
   ifeq ($(NATIVE), osx)
     ifeq ($(shell $(CXX) -E -Os - < /dev/null > /dev/null 2>&1 && echo fos),fos)
-      OPTLEVEL = -Os
+      OPTLEVEL = -O3
     else
       OPTLEVEL = -O3
     endif
   else ifeq ($(NATIVE), emscripten)
-    OPTLEVEL = -Os
+    OPTLEVEL = -O3
   else
     # MXE ICE Workaround
     # known bad on 4.9.3 and 4.9.4, if it gets fixed this could include a version test too
     ifeq ($(CXXMACHINE), x86_64-w64-mingw32.static)
       OPTLEVEL = -O3
     else
-      OPTLEVEL = -Os
+      OPTLEVEL = -O3
     endif
   endif
 
@@ -440,7 +440,7 @@ ifeq ($(RELEASE), 1)
   CXXFLAGS += $(LTOFLAGS)
 
   # OTHERS += -mmmx -m3dnow -msse -msse2 -msse3 -mfpmath=sse -mtune=native
-  # OTHERS += -march=native # Uncomment this to build an optimized binary for your machine only
+  OTHERS += -march=native # Uncomment this to build an optimized binary for your machine only
 
   # Strip symbols, generates smaller executable.
   OTHERS += $(RELEASE_FLAGS)
@@ -662,7 +662,7 @@ ifeq ($(NATIVE), emscripten)
 
   ifeq ($(RELEASE), 1)
     # Release-mode Linker flags.
-    LDFLAGS += -Os
+    LDFLAGS += -O3
     LDFLAGS += -sLZ4
   else
     # Debug mode linker flags.
