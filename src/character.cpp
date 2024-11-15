@@ -10909,33 +10909,6 @@ void Character::process_effects()
         terminating_effects.pop();
     }
 
-    if( has_effect( effect_boomered ) && ( is_avatar() || is_npc() ) && one_in( 10 ) &&
-        !has_trait( trait_COMPOUND_EYES ) && !has_effect( effect_pre_conjunctivitis_bacterial ) &&
-        !has_effect( effect_pre_conjunctivitis_viral ) && !has_effect( effect_conjunctivitis_bacterial ) &&
-        !has_effect( effect_conjunctivitis_viral ) ) {
-        //Washing your eyes out in time may save you from getting pinkeye.
-        float checked_health = get_lifestyle() + 200.0;
-        //Some animal eyes are more vulnerable to infection.
-        if( has_trait_flag( json_flag_EYE_MEMBRANE ) ) {
-            checked_health -= 50;
-        }
-        //Ditto for contact lenses.
-        if( has_effect( effect_contacts ) ) {
-            checked_health -= 50;
-        }
-        if( has_trait( trait_INFRESIST ) ) {
-            checked_health += 50;
-        }
-        float pinkeye_chance = 4.0 + 6.0 / 25.0 * checked_health;
-        if( one_in( pinkeye_chance ) ) {
-            if( one_in( 2 ) ) {
-                add_effect( effect_pre_conjunctivitis_bacterial, 70_hours );
-            } else {
-                add_effect( effect_pre_conjunctivitis_viral, 70_hours );
-            }
-        }
-    }
-
     map &here = get_map();
     if( has_effect( effect_slippery_terrain ) && !is_on_ground() && !is_crouching() &&
         here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) ) {
