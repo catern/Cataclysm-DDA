@@ -69,8 +69,6 @@ static const itype_id itype_rope_30( "rope_30" );
 
 static const json_character_flag json_flag_INFECTION_IMMUNE( "INFECTION_IMMUNE" );
 static const json_character_flag json_flag_WALL_CLING( "WALL_CLING" );
-static const json_character_flag json_flag_WINGS_1( "WINGS_1" );
-static const json_character_flag json_flag_WINGS_2( "WINGS_2" );
 
 static const material_id material_kevlar( "kevlar" );
 static const material_id material_steel( "steel" );
@@ -833,9 +831,9 @@ bool trapfunc::pit( const tripoint &p, Creature *c, item * )
     monster *z = dynamic_cast<monster *>( c );
     Character *you = dynamic_cast<Character *>( c );
     if( you != nullptr ) {
-        if( you->has_flag( json_flag_WINGS_2 ) || ( one_in( 2 ) &&
-                you->has_flag( json_flag_WINGS_1 ) ) ) {
-            you->add_msg_if_player( _( "You flap your wings and flutter down gracefully." ) );
+        if( you->can_fly() ) {
+            you->add_msg_player_or_npc( _( "You spread your wings to slow your fall." ),
+                                        _( "<npcname> spreads their wings to slow their fall." ) );
         } else if( you->has_active_bionic( bio_shock_absorber ) ) {
             you->add_msg_if_player( m_info,
                                     _( "You hit the ground hard, but your grav chute handles the impact admirably!" ) );
@@ -885,9 +883,9 @@ bool trapfunc::pit_spikes( const tripoint &p, Creature *c, item * )
     if( you != nullptr ) {
         int dodge = you->get_dodge();
         int damage = pit_effectiveness( p ) * rng( 20, 50 );
-        if( you->has_flag( json_flag_WINGS_2 ) || ( one_in( 2 ) &&
-                you->has_flag( json_flag_WINGS_1 ) ) ) {
-            you->add_msg_if_player( _( "You flap your wings and flutter down gracefully." ) );
+        if( you->can_fly() ) {
+            you->add_msg_player_or_npc( _( "You spread your wings to slow your fall." ),
+                                        _( "<npcname> spreads their wings to slow their fall." ) );
         } else if( you->has_active_bionic( bio_shock_absorber ) ) {
             you->add_msg_if_player( m_info,
                                     _( "You hit the ground hard, but your grav chute handles the impact admirably!" ) );
@@ -970,9 +968,9 @@ bool trapfunc::pit_glass( const tripoint &p, Creature *c, item * )
     if( you != nullptr ) {
         int dodge = you->get_dodge();
         int damage = pit_effectiveness( p ) * rng( 15, 35 );
-        if( you->has_flag( json_flag_WINGS_2 ) || ( one_in( 2 ) &&
-                you->has_flag( json_flag_WINGS_1 ) ) ) {
-            you->add_msg_if_player( _( "You flap your wings and flutter down gracefully." ) );
+        if( you->can_fly() ) {
+            you->add_msg_player_or_npc( _( "You spread your wings to slow your fall." ),
+                                        _( "<npcname> spreads their wings to slow their fall." ) );
         } else if( you->has_active_bionic( bio_shock_absorber ) ) {
             you->add_msg_if_player( m_info,
                                     _( "You hit the ground hard, but your grav chute handles the impact admirably!" ) );
@@ -1271,10 +1269,10 @@ bool trapfunc::ledge( const tripoint &p, Creature *c, item * )
     } else {
         you->setpos( where );
     }
-    if( you->has_flag( json_flag_WINGS_2 ) || ( one_in( 2 ) &&
-            you->has_flag( json_flag_WINGS_1 ) ) ) {
-        you->add_msg_player_or_npc( _( "You flap your wings and flutter down gracefully." ),
-                                    _( "<npcname> flaps their wings and flutters down gracefully." ) );
+    if( you->can_fly() ) {
+        you->add_msg_player_or_npc( _( "You spread your wings to slow your fall." ),
+                                    _( "<npcname> spreads their wings to slow their fall." ) );
+        height = std::max( 0, height - 2 );
     } else if( you->has_active_bionic( bio_shock_absorber ) ) {
         you->add_msg_if_player( m_info,
                                 _( "You hit the ground hard, but your grav chute handles the impact admirably!" ) );
