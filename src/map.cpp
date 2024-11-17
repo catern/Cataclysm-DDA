@@ -6130,6 +6130,11 @@ const trap &map::tr_at( const tripoint &p ) const
     return current_submap->get_trap( l ).obj();
 }
 
+const trap &map::tr_at( const tripoint_abs_ms &p ) const
+{
+    return tr_at( p.raw() );
+}
+
 const trap &map::tr_at( const tripoint_bub_ms &p ) const
 {
     return tr_at( p.raw() );
